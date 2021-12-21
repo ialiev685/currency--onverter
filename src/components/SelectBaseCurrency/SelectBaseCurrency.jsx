@@ -1,7 +1,6 @@
 import React from "react";
 
 export const SelectBaseCurrency = ({ listOption, onChange }) => {
-  console.log(listOption);
   return (
     <div>
       <select

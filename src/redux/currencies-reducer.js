@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
   error: null,
   dateUpdate: null,
+  baseCurrency: null,
 };
 
 const currencySlice = createSlice({
@@ -17,7 +18,8 @@ const currencySlice = createSlice({
     },
     [thunkfetchQuotes.fulfilled](state, action) {
       state.isLoading = false;
-      state.dataCurrencies = action.payload;
+      state.dataCurrencies = action.payload.dataNormalize;
+      state.baseCurrency = action.payload.base_code;
       state.dateUpdate = new Date().toLocaleDateString();
     },
     [thunkfetchQuotes.rejected](state, action) {

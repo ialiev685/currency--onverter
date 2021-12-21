@@ -7,22 +7,33 @@ export const thunkfetchQuotes = createAsyncThunk(
     try {
       const dateToday = new Date().toLocaleDateString();
 
-      const state = thunkAPI.getState();
+      const {
+        dateUpdate,
+        baseCurrency: oldBaseCurrency,
+        dataCurrencies,
+      } = thunkAPI.getState();
 
-      if (state.dateUpdate === dateToday) {
-        return state.dataCurrencies;
+      if (dateUpdate === dateToday && baseCurrency === oldBaseCurrency) {
+        const oldData = {};
+        oldData.base_code = baseCurrency;
+        oldData.dataNormalize = dataCurrencies;
+
+        return oldData;
       }
       const response = await fetchQuotes(baseCurrency);
-      console.log("Запрос продолжается");
+
       if (response.conversion_rates) {
         const data = response.conversion_rates;
+
         const dataNormalize = Object.entries(data)
           .map(([key, value]) => ({
             currency: key,
             value: value,
           }))
           .filter(({ currency }) => ["EUR", "USD", "RUB"].includes(currency));
-        return dataNormalize;
+        delete response.conversion_rates;
+        response.dataNormalize = dataNormalize;
+        return response;
       }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
