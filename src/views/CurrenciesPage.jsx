@@ -14,9 +14,9 @@ export const CurrenciesPage = () => {
 
   const dispatch = useDispatch();
 
-  const handleChangeBaseCurrency = (value) => {
-    setBaseCurrency(value);
-  };
+  // const handleChangeBaseCurrency = (value) => {
+  //   setBaseCurrency(value);
+  // };
 
   useEffect(() => {
     dispatch(thunkfetchQuotes(baseCurrency));
@@ -28,7 +28,8 @@ export const CurrenciesPage = () => {
       {dataStore.length && (
         <SelectBaseCurrency
           listOption={dataStore}
-          onChange={handleChangeBaseCurrency}
+          value={baseCurrency}
+          onChange={setBaseCurrency}
         />
       )}
       <TableCurrencies data={dataStore} />

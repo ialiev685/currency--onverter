@@ -21,16 +21,22 @@ export const fetchQuotes = (baseCurrency = "RUB") => {
   });
 };
 
-export const fetchConvension = (from, to) => {
+export const fetchConvension = (from, to, amount) => {
+  console.log(from, to, amount);
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `${BASE_URL}/${API_KEY}/pair/${from}/${to}`, true);
+    xhr.open(
+      "GET",
+      `${BASE_URL}/${API_KEY}/pair/${from}/${to}/${amount}`,
+      true
+    );
 
     xhr.send();
 
     xhr.onload = function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
+          console.log(JSON.parse(xhr.response));
           resolve(JSON.parse(xhr.response));
         }
       }
