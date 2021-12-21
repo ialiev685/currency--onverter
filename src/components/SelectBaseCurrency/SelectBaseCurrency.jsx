@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export const SelectBaseCurrency = ({ listOption, onChange }) => {
   console.log(listOption);
-
   return (
     <div>
       <select
@@ -10,9 +9,9 @@ export const SelectBaseCurrency = ({ listOption, onChange }) => {
         id="currency"
         onChange={(e) => onChange(e.target.value)}
       >
-        {listOption.map(([key]) => (
-          <option value={key} key={key}>
-            {key}
+        {listOption.map(({ currency }) => (
+          <option value={currency} key={currency}>
+            {currency}
           </option>
         ))}
       </select>

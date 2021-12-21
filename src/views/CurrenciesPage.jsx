@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-import { fetchQuotes } from "../services";
+// import { fetchQuotes } from "../services";
 import { TableCurrencies } from "../components/TableCurrencies";
 import { SelectBaseCurrency } from "../components/SelectBaseCurrency";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { thunkfetchQuotes } from "../redux";
+import { getDataCurrencies } from "../redux";
 
 export const CurrenciesPage = () => {
   const [ListCurrencies, setListCurrencies] = useState([]);
   const [baseCurrency, setBaseCurrency] = useState("RUB");
+
+  const dispatch = useDispatch();
+  const dataStore = useSelector(getDataCurrencies);
+  console.log(dataStore);
 
   const handleChangeBaseCurrency = (value) => {
     setBaseCurrency(value);
@@ -14,24 +22,20 @@ export const CurrenciesPage = () => {
 
   useEffect(() => {
     if (!baseCurrency) return;
-    fetchQuotes(baseCurrency).then((resolve) => {
-      const dataArr = Object.entries(resolve.conversion_rates);
-      const dataFilter = dataArr.filter(([key]) =>
-        ["EUR", "USD", "RUB"].includes(key)
-      );
-
-      setListCurrencies(dataFilter);
-    });
-  }, [baseCurrency]);
+    console.log("Запрос");
+    dispatch(thunkfetchQuotes(baseCurrency));
+  }, [baseCurrency, dispatch]);
 
   return (
     <div>
       <h2>Курсы валют</h2>
-      <SelectBaseCurrency
-        listOption={ListCurrencies}
-        onChange={handleChangeBaseCurrency}
-      />
-      <TableCurrencies data={ListCurrencies} />
+      {dataStore.length && (
+        <SelectBaseCurrency
+          listOption={dataStore}
+          onChange={handleChangeBaseCurrency}
+        />
+      )}
+      <TableCurrencies data={dataStore} />
     </div>
   );
 };

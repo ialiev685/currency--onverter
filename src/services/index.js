@@ -1,1 +1,1 @@
-export { fetchQuotes } from "./cbr-api";
+export { fetchQuotes, fetchConvension } from "./cbr-api";

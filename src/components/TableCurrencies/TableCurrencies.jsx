@@ -1,6 +1,22 @@
 import React from "react";
 
 export const TableCurrencies = ({ data }) => {
+  const markupSceleton = (
+    <>
+      <tr>
+        <td>EUR</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>USD</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>RUB</td>
+        <td>0</td>
+      </tr>
+    </>
+  );
   return (
     <div>
       <table>
@@ -11,12 +27,14 @@ export const TableCurrencies = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map(([key, value]) => (
-            <tr key={key}>
-              <td>{key}</td>
-              <td>{(1 / value).toFixed(2)}</td>
-            </tr>
-          ))}
+          {data.length > 0
+            ? data.map(({ currency, value }) => (
+                <tr key={currency}>
+                  <td>{currency}</td>
+                  <td>{(1 / value).toFixed(2)}</td>
+                </tr>
+              ))
+            : markupSceleton}
         </tbody>
       </table>
     </div>
