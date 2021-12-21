@@ -5,13 +5,15 @@ export const thunkfetchQuotes = createAsyncThunk(
   "currencies/fetchQuotes",
   async (baseCurrency, thunkAPI) => {
     try {
-      console.log(new Date().toLocaleDateString());
+      const dateToday = new Date().toLocaleDateString();
 
       const state = thunkAPI.getState();
 
-      console.log(state);
+      if (state.dateUpdate === dateToday) {
+        return state.dataCurrencies;
+      }
       const response = await fetchQuotes(baseCurrency);
-
+      console.log("Запрос продолжается");
       if (response.conversion_rates) {
         const data = response.conversion_rates;
         const dataNormalize = Object.entries(data)

@@ -1,3 +1,2 @@
-export const getDataCurrencies = (state) =>
-  state.currencyReducer.dataCurrencies;
-export const getDateUpdate = (state) => state.currencyReducer.dateUpdate;
+export const getDataCurrencies = (state) => state.dataCurrencies;
+export const getDateUpdate = (state) => state.dateUpdate;
