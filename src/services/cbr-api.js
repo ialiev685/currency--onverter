@@ -13,7 +13,7 @@ export const fetchQuotes = (baseCurrency = "RUB") => {
         if (xhr.status === 200) {
           resolve(JSON.parse(xhr.response));
         } else {
-          reject(xhr.statusText || new Error("internet disconnected"));
+          reject(xhr.statusText || new Error("request error"));
         }
       }
     };
@@ -36,7 +36,7 @@ export const fetchConvension = (from, to, amount) => {
         if (xhr.status === 200) {
           resolve(JSON.parse(xhr.response));
         } else {
-          reject(xhr.statusText || new Error("internet disconnected"));
+          reject(xhr.statusText || new Error("request error"));
         }
       }
     };
