@@ -4,8 +4,13 @@ import { SelectBaseCurrency } from "../SelectBaseCurrency";
 import { SelectConversionTo } from "../SelectConversionTo";
 import { fetchConvension } from "../../services";
 //redux
-import { useSelector } from "react-redux";
-import { getBaseCurrency, getDataCurrencies } from "../../redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getBaseCurrency,
+  getDataCurrencies,
+  thunkfetchQuotes,
+} from "../../redux";
+
 //стили
 import s from "./Converter.module.css";
 //lodash
@@ -14,6 +19,7 @@ const debounce = require("lodash.debounce");
 export const Converter = () => {
   const currentCurrency = useSelector(getBaseCurrency);
   const dataStore = useSelector(getDataCurrencies);
+  const dispatch = useDispatch();
 
   const [amount, setAmount] = useState("");
   const [baseCurrency, setBaseCurrency] = useState(currentCurrency || "RUB");
@@ -31,6 +37,12 @@ export const Converter = () => {
     ),
     []
   );
+
+  useEffect(() => {
+    if (dataStore.length) return;
+
+    dispatch(thunkfetchQuotes(baseCurrency));
+  }, [baseCurrency, dataStore.length, dispatch]);
 
   useEffect(() => {
     if (!amount) return;

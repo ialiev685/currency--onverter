@@ -1,5 +1,5 @@
 {
-  "homepage": "https://ialiev685.github.io",
+
   "name": "converter",
   "version": "0.1.0",
   "private": true,
@@ -27,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [
