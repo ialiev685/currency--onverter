@@ -14,7 +14,7 @@ function App() {
         <Conteiner>
           <Routes>
             <Route path="/" exact element={<HomePage />} />
-            <Route path="courses" element={<CurrenciesPage />} />
+            <Route path="/courses" element={<CurrenciesPage />} />
           </Routes>
         </Conteiner>
       </section>
