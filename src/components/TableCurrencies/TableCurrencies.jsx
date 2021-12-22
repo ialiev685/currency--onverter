@@ -1,4 +1,5 @@
 import React from "react";
+import s from "./TableCurrencies.module.css";
 
 export const TableCurrencies = ({ data }) => {
   const markupSceleton = (
@@ -18,8 +19,8 @@ export const TableCurrencies = ({ data }) => {
     </>
   );
   return (
-    <div>
-      <table>
+    <div className={s.wrapper}>
+      <table className={s.table}>
         <thead>
           <tr>
             <th>Валюта</th>

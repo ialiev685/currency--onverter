@@ -1,0 +1,12 @@
+.selectConvension {
+  width: 100px;
+  text-align: center;
+
+  border: none;
+  outline: none;
+  padding: 5px;
+
+  border-radius: 5px;
+
+  background-color: #d4ec8c;
+}

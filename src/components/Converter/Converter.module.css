@@ -1,0 +1,39 @@
+.converter {
+  text-align: center;
+}
+
+.converter__total {
+  text-align: center;
+
+  margin: 0;
+  margin-bottom: 20px;
+
+  min-width: 280px;
+
+  font-size: 18px;
+
+  padding: 5px 10px;
+
+  background-color: #d4ec8c;
+}
+
+.converter__amount {
+  min-width: 280px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 5px;
+
+  padding: 5px 10px;
+
+  font-size: 18px;
+
+  margin-bottom: 20px;
+}
+
+.converter__wrapperSelect {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

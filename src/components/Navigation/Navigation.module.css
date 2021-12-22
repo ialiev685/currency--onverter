@@ -1,3 +1,10 @@
+.wrapper {
+  background-color: #1d8eea;
+}
+
+.navigation {
+}
+
 .navigation__list {
   list-style: none;
   margin: 0;
@@ -9,5 +16,13 @@
 .navigation__link {
   text-decoration: none;
 
-  margin-right: 20px;
+  color: #f8f5e8;
+  margin-right: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navigation__link.active {
+  color: #fb9a3b;
 }

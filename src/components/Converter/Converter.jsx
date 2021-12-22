@@ -6,6 +6,8 @@ import { fetchConvension } from "../../services";
 //redux
 import { useSelector } from "react-redux";
 import { getBaseCurrency, getDataCurrencies } from "../../redux";
+//стили
+import s from "./Converter.module.css";
 //lodash
 const debounce = require("lodash.debounce");
 
@@ -18,6 +20,7 @@ export const Converter = () => {
   const [conversionTo, setConversionTo] = useState("USD");
   const [total, setTotal] = useState("");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceFn = useCallback(
     debounce(
       (baseCurrency, conversionTo, amount) =>
@@ -36,17 +39,20 @@ export const Converter = () => {
   }, [amount, baseCurrency, conversionTo, debounceFn]);
 
   return (
-    <div>
+    <div className={s.converter}>
       {total ? (
-        <p>{`${total.conversion_result.toLocaleString()} ${
+        <p
+          className={s.converter__total}
+        >{`${total.conversion_result.toLocaleString()} ${
           total.target_code
         }`}</p>
       ) : (
-        <p>Пусто</p>
+        <p className={s.converter__total}>Пусто</p>
       )}
 
       <NumberFormat
         thousandsGroupStyle="thousand"
+        className={s.converter__amount}
         decimalSeparator="."
         thousandSeparator={true}
         value={amount}
@@ -58,17 +64,19 @@ export const Converter = () => {
           setAmount(value);
         }}
       />
-
-      <SelectBaseCurrency
-        listOption={dataStore}
-        onChange={setBaseCurrency}
-        value={baseCurrency}
-      />
-      <SelectConversionTo
-        listOption={dataStore}
-        onChange={setConversionTo}
-        value={conversionTo}
-      />
+      <div className={s.converter__wrapperSelect}>
+        <SelectBaseCurrency
+          listOption={dataStore}
+          onChange={setBaseCurrency}
+          value={baseCurrency}
+        />
+        <p className={s.converter__text}>на</p>
+        <SelectConversionTo
+          listOption={dataStore}
+          onChange={setConversionTo}
+          value={conversionTo}
+        />
+      </div>
     </div>
   );
 };
