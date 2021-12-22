@@ -8,10 +8,12 @@ export const fetchQuotes = (baseCurrency = "RUB") => {
 
     xhr.send();
 
-    xhr.onload = function () {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           resolve(JSON.parse(xhr.response));
+        } else {
+          reject(xhr.statusText || new Error("internet disconnected"));
         }
       }
     };
@@ -29,10 +31,12 @@ export const fetchConvension = (from, to, amount) => {
 
     xhr.send();
 
-    xhr.onload = function () {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           resolve(JSON.parse(xhr.response));
+        } else {
+          reject(xhr.statusText || new Error("internet disconnected"));
         }
       }
     };
